@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+      
+</body>
+<script>
+    /*
+    the game logs the round up until 5
+    whoever gets the most wins out of 5 rounds, wins
+    */   
+    let randomNumber = Math.floor(Math.random() * 3) + 1;
+    
+
+        function getComputerChoice(random) {
+            if(random === 1){
+                return "rock";
+            } else if(random === 2){
+                return "paper";
+            } else if(random === 3){
+                return "scissors"; 
+            } else {
+                return "Error";
+            } 
+        }
+
+        const computerChoice = getComputerChoice(randomNumber);
+        const playerChoice = "scissors";
+        console.log(computerChoice);
+        console.log(playerChoice);  
+        
+        function playRound(playerChoice, computerChoice){
+            if(playerChoice === "rock" && computerChoice === "paper" ||
+            playerChoice === "paper" && computerChoice === "scissors" || 
+            playerChoice === "scissors" && computerChoice === "rock"){
+                return "You Lose!";
+            }   
+            else if(playerChoice === "rock" && computerChoice === "scissors" ||
+            playerChoice === "paper" && computerChoice === "rock" || 
+            playerChoice === "scissors" && computerChoice === "paper"){
+                return "You Win!";
+            }   
+            else {
+                return "It was a tie!";
+            }
+        }
+        console.log(playRound(playerChoice, computerChoice));
+
+</script>
+</html>
