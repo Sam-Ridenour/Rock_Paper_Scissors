@@ -14,7 +14,9 @@
     the game logs the round up until 5
     whoever gets the most wins out of 5 rounds, wins
     */   
-    let randomNumber = Math.floor(Math.random() * 3) + 1;
+        let randomNumber = Math.floor(Math.random() * 3) + 1;
+        let computerPoint = 0;
+        let playerPoint = 0;
     
 
         function getComputerChoice(random) {
@@ -30,26 +32,46 @@
         }
 
         const computerChoice = getComputerChoice(randomNumber);
-        const playerChoice = "scissors";
-        console.log(computerChoice);
-        console.log(playerChoice);  
+        
+         
         
         function playRound(playerChoice, computerChoice){
+            
+
+            console.log("The computers choice is " + computerChoice);
+            console.log("The players choice is " + playerChoice); 
             if(playerChoice === "rock" && computerChoice === "paper" ||
             playerChoice === "paper" && computerChoice === "scissors" || 
             playerChoice === "scissors" && computerChoice === "rock"){
-                return "You Lose!";
+                computerPoint++;
+                return "You Lose!";                
             }   
             else if(playerChoice === "rock" && computerChoice === "scissors" ||
             playerChoice === "paper" && computerChoice === "rock" || 
             playerChoice === "scissors" && computerChoice === "paper"){
-                return "You Win!";
+                playerPoint++;
+                return "You Win!";                
             }   
-            else {
+            else if (playerChoice === "rock" && computerChoice === "rock" ||
+            playerChoice === "paper" && computerChoice === "paper" || 
+            playerChoice === "scissors" && computerChoice === "scissors"){
                 return "It was a tie!";
+            } else {
+                return "Invalid Input";
             }
         }
-        console.log(playRound(playerChoice, computerChoice));
+        //console.log(playRound(playerChoice, computerChoice));
+
+        function game(){
+            for(let i = 0; i < 5; i++){
+                playerChoice = prompt("Rock, Paper, Or Scissors?");
+                console.log(playRound(playerChoice.toLowerCase(), computerChoice));
+                console.log("The computers points are: " + computerPoint);
+                console.log("The players points are: " + playerPoint);
+            }
+            
+        }
+        game();
 
 </script>
 </html>
