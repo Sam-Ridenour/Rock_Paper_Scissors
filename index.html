@@ -15,10 +15,13 @@
     whoever gets the most wins out of 5 rounds, wins
     */   
         let randomNumber = Math.floor(Math.random() * 3) + 1;
+
+        console.log(randomNumber);
         let computerPoint = 0;
         let playerPoint = 0;
-    
 
+          
+    
         function getComputerChoice(random) {
             if(random === 1){
                 return "rock";
@@ -28,48 +31,55 @@
                 return "scissors"; 
             } else {
                 return "Error";
-            } 
-        }
-
-        const computerChoice = getComputerChoice(randomNumber);
+            }
+        }     
         
-         
+        const computerChoice = getComputerChoice(randomNumber);  
         
-        function playRound(playerChoice, computerChoice){
-            
+        function playRound(pChoice, cpChoice){           
+            console.log("The computers choice is " + cpChoice);
+            console.log("The players choice is " + pChoice); 
 
-            console.log("The computers choice is " + computerChoice);
-            console.log("The players choice is " + playerChoice); 
-            if(playerChoice === "rock" && computerChoice === "paper" ||
-            playerChoice === "paper" && computerChoice === "scissors" || 
-            playerChoice === "scissors" && computerChoice === "rock"){
+            if(pChoice === "rock" && cpChoice === "paper" ||
+            pChoice === "paper" && cpChoice === "scissors" || 
+            pChoice === "scissors" && cpChoice === "rock"){
                 computerPoint++;
                 return "You Lose!";                
             }   
-            else if(playerChoice === "rock" && computerChoice === "scissors" ||
-            playerChoice === "paper" && computerChoice === "rock" || 
-            playerChoice === "scissors" && computerChoice === "paper"){
+            else if(pChoice === "rock" && cpChoice === "scissors" ||
+            pChoice === "paper" && cpChoice === "rock" || 
+            pChoice === "scissors" && cpChoice === "paper"){
                 playerPoint++;
                 return "You Win!";                
             }   
-            else if (playerChoice === "rock" && computerChoice === "rock" ||
-            playerChoice === "paper" && computerChoice === "paper" || 
-            playerChoice === "scissors" && computerChoice === "scissors"){
+            else if (pChoice === "rock" && cpChoice === "rock" ||
+            pChoice === "paper" && cpChoice === "paper" || 
+            pChoice === "scissors" && cpChoice === "scissors"){
                 return "It was a tie!";
             } else {
                 return "Invalid Input";
             }
         }
-        //console.log(playRound(playerChoice, computerChoice));
 
-        function game(){
+        function higherPoints(){
+            if(playerPoint > computerPoint){
+                return "You are the Winner!";
+            } else if (playerPoint < computerPoint) {
+                return "You lose... better luck next time!";
+            } else {
+                return "It was a tie! Try again to beat the computer!";
+            }
+        }
+
+        function game(){     
+
             for(let i = 0; i < 5; i++){
-                playerChoice = prompt("Rock, Paper, Or Scissors?");
+                let playerChoice = prompt("Rock, Paper, Or Scissors?");
                 console.log(playRound(playerChoice.toLowerCase(), computerChoice));
                 console.log("The computers points are: " + computerPoint);
-                console.log("The players points are: " + playerPoint);
-            }
-            
+                console.log("The players points are: " + playerPoint);             
+            }      
+            console.log(higherPoints());
         }
         game();
 
