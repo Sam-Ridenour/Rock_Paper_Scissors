@@ -7,17 +7,62 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
-      
+      <button id="rock">Rock</button>
+      <button id="paper">Paper</button>
+      <button id="scissors">Scissors</button>
+      <div id="results">Results</div>
 </body>
-<script>       
+<script>        
+        let playerChoice = '';
         let computerPoint = 0;
         let playerPoint = 0;
+        let pointTotal = 5;
+        let endGame = false;
 
-        game();
+        const rock = document.querySelector('#rock');       
+        const paper = document.querySelector('#paper');      
+        const scissors = document.querySelector('#scissors');
+        const results = document.querySelector('#results');
+        const cpPoint = document.createElement('div');
+        const pPoint = document.createElement('div');
+        const higherPoint = document.createElement('div');
+        const cpuChoice = document.createElement('div');
+        const ppChoice = document.createElement('div');
+        const roundResults = document.createElement('div');
+
+        cpuChoice.classList.add('cpuChoice');
+        results.appendChild(cpuChoice);
+
+        ppChoice.classList.add('ppChoice');
+        results.appendChild(ppChoice);
+
+        cpPoint.classList.add('cpPoint');        
+        results.appendChild(cpPoint);
+
+        pPoint.classList.add('pPoint');        
+        results.appendChild(pPoint);
+
+        roundResults.classList.add('roundResults');
+        results.appendChild(roundResults);
+
+        higherPoint.classList.add('higherPoint');
+        results.appendChild(higherPoint);
+        
+        rock.addEventListener('click', () => {
+                playerChoice = "rock";
+                game();
+            });  
+            paper.addEventListener('click', () => {
+                playerChoice = "paper";                
+                game();
+            });  
+            scissors.addEventListener('click', () => {
+                playerChoice = "scissors";
+                game();
+            });       
         
         function getComputerChoice(){            
             let random = Math.floor(Math.random() * 3) + 1;
-            console.log(random);  
             if(random === 1){
                 return "rock";
             }    
@@ -30,41 +75,42 @@
         }    
         
         function playRound(pChoice, cpChoice){        
-            console.log("The computers choice is " + cpChoice);
-            console.log("The players choice is " + pChoice); 
+            cpuChoice.textContent = "The Computers choice is " + cpChoice;
+            ppChoice.textContent = "The Players choice is " + pChoice; 
             if(pChoice === cpChoice) {
-                return "It was a tie!";
+                roundResults.textContent = "It was a tie!";
             }  
             else if(pChoice === "rock" && cpChoice != "paper" ||
             pChoice === "paper" && cpChoice != "scissors" ||
             pChoice === "scissors" && cpChoice != "rock"){
                 playerPoint++;
-                return "You Win!";               
+                roundResults.textContent  = "You won this round!";               
             }else {
                 computerPoint++;
-                return "You Lose!";                
+                roundResults.textContent  = "You lost this round!";                
             }
         }
 
         function higherPoints(){
-            if(playerPoint > computerPoint){
-                return "You are the Winner!";
-            } else if (playerPoint < computerPoint) {
-                return "You lose... better luck next time!";
+            if(playerPoint === pointTotal){
+                higherPoint.textContent = "Player Won Best Out Of 5!";
+                endGame = true;
+            }else if (computerPoint === pointTotal){
+                higherPoint.textContent = "Computer Won Best Out Of 5.";
+                endGame = true;
             } else {
-                return "It was a tie! Try again to beat the computer!";
+                return;
             }
         }        
 
-        function game(){     
-            for(let i = 0; i < 5; i++){               
-                let playerChoice = prompt("Rock, Paper, Or Scissors?");
-                console.log(playRound(playerChoice.toLowerCase(), getComputerChoice()));
-                console.log("The computers points are: " + computerPoint);
-                console.log("The players points are: " + playerPoint);                 
-            }   
-               
-            console.log(higherPoints());
-        }       
+        function game(){ 
+            if(!endGame){
+            playRound(playerChoice, getComputerChoice());
+                        
+            cpPoint.textContent = 'Computers points are: ' + computerPoint;
+            pPoint.textContent = 'Players points are: ' + playerPoint;
+            higherPoints(); 
+            } 
+        }              
 </script>
 </html>
